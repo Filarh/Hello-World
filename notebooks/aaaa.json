@@ -1,0 +1,158 @@
+{
+  "5": {
+    "inputs": {
+      "width": 1080,
+      "height": 2400,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "ritafjrd woman in elegant lingerie, soft pastel tones with lace details and satin texture, posing in a dynamic, playful way — one shoulder slightly forward, hair in motion, gentle twist of the waist. The lingerie is tasteful and flattering, with thin straps and delicate trim, not overly revealing. Her expression is confident and fun, a slight smile with natural intensity in the eyes. Captured in a close or medium shot with soft directional lighting that highlights the curves of her collarbone and torso, natural skin texture visible. Background is blurred and clean, just soft gradients or subtle light streaks to keep focus on her movement and emotion.\n",
+      "clip": [
+        "29",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "30",
+        0
+      ],
+      "vae": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "34",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "10": {
+    "inputs": {
+      "vae_name": "flux_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "27": {
+    "inputs": {
+      "unet_name": "realDream_flux1V1-Q3_K_S.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "29": {
+    "inputs": {
+      "lora_name": "ritafjrd.safetensors",
+      "strength_model": 1.1000000000000003,
+      "strength_clip": 1.1000000000000003,
+      "model": [
+        "27",
+        0
+      ],
+      "clip": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "30": {
+    "inputs": {
+      "seed": 684826458781750,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "29",
+        0
+      ],
+      "positive": [
+        "6",
+        0
+      ],
+      "negative": [
+        "31",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "31": {
+    "inputs": {
+      "text": "closed eyes, big breast, cartoon, anime, painting, 3d render, plastic skin, airbrushed, blur, pixelated, harsh light, fisheye, oversaturated, flat pose, exaggerated proportions, watermark, signature\n",
+      "clip": [
+        "29",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "34": {
+    "inputs": {
+      "anything": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "easy clearCacheAll",
+    "_meta": {
+      "title": "Clear Cache All"
+    }
+  },
+  "35": {
+    "inputs": {
+      "clip_name1": "CLIP-GmP-ViT-L-14.safetensors",
+      "clip_name2": "t5-v1_1-xxl-encoder-Q4_K_S.gguf",
+      "type": "flux"
+    },
+    "class_type": "DualCLIPLoaderGGUF",
+    "_meta": {
+      "title": "DualCLIPLoader (GGUF)"
+    }
+  }
+}
